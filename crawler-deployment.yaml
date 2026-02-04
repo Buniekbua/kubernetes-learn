@@ -20,6 +20,8 @@ spec:
         volumeMounts:
           - name: cache-volume
             mountPath: /cache
+          - name: synergychat-api-volume
+            mountPath: /persist
         envFrom:
           - configMapRef:
               name: synergychat-crawler-configmap
@@ -28,6 +30,8 @@ spec:
         volumeMounts:
           - name: cache-volume
             mountPath: /cache
+          - name: synergychat-api-volume
+            mountPath: /persist
         env:
           - name: CRAWLER_PORT
             valueFrom:
@@ -49,6 +53,8 @@ spec:
         volumeMounts:
           - name: cache-volume
             mountPath: /cache
+          - name: synergychat-api-volume
+            mountPath: /persist
         env:
           - name: CRAWLER_PORT
             valueFrom:
@@ -68,3 +74,6 @@ spec:
       volumes:
         - name: cache-volume
           emptyDir: {}
+        - name: synergychat-api-volume
+          persistentVolumeClaim:
+            claimName: synergychat-api-pvc
